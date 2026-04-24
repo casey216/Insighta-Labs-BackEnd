@@ -48,7 +48,7 @@ class ToDictMixin:
         exclude = exclude or set()
         mapper = _mapper(self)
         return {
-            col.key: getattr(self, col.key)
+            col.key: _serialize(getattr(self, col.key))
             for col in mapper.column_attrs
             if col.key is not None and col.key not in exclude
         }

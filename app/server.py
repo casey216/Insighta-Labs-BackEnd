@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.api.v1.routers import api_router
 from app.core.settings import settings
 from app.db.database import init_db
 from app.models.profile import Profile
@@ -16,6 +17,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(api_router)
 
 reload = False
 if settings.ENV == "development":

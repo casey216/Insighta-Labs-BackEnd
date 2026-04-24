@@ -101,9 +101,9 @@ class ProfileQueryBuilder:
         self.query = query
         self.sort_column = None
 
-    def filter_gender(self, genders: list[Gender] | None):
-        if genders:
-            self.query = self.query.filter(Profile.gender.in_(genders))
+    def filter_gender(self, gender: Gender | None):
+        if gender:
+            self.query = self.query.filter(Profile.gender == gender)
         return self
 
     def filter_age(self, min_age: int | None, max_age: int | None):
@@ -113,9 +113,9 @@ class ProfileQueryBuilder:
             self.query = self.query.filter(Profile.age <= max_age)
         return self
     
-    def filter_age_group(self, age_groups: list[AgeGroup] | None):
-        if age_groups:
-            self.query = self.query.filter(Profile.age_group.in_(age_groups))
+    def filter_age_group(self, age_group: AgeGroup | None):
+        if age_group:
+            self.query = self.query.filter(Profile.age_group == age_group)
         return self
 
     def filter_country_id(self, country_id: str | None):
@@ -125,12 +125,12 @@ class ProfileQueryBuilder:
 
     def filter_country_probability(self, min_country_p: float | None):
         if min_country_p:
-            self.query = self.query.filter(Profile.country_probability == min_country_p)
+            self.query = self.query.filter(Profile.country_probability >= min_country_p)
         return self
     
     def filter_gender_probability(self, min_gender_p: float | None):
         if min_gender_p:
-            self.query = self.query.filter(Profile.country_probability == min_gender_p)
+            self.query = self.query.filter(Profile.gender_probability >= min_gender_p)
         return self
     
     def sort_by(self, sort_params: SortParams):

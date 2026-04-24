@@ -43,9 +43,30 @@ class ProfileUpdate(BaseModel):
     country_name: str | None = None
     country_probability: float | None = None
 
+class ProfileOut(BaseModel):
+    id: str
+    name: str
+    gender: str
+    gender_probability: float
+    age: int
+    age_group: str
+    country_id: str
+    country_name: str
+    country_probability: float
+    created_at: str
+
+class AllProfiles(BaseModel):
+    status: str
+    page: int
+    limit: int
+    total: int
+    data: list[ProfileOut]
+
 class FilterParams(BaseModel):
-    gender: list[Gender] | None = None
-    age_group: list[AgeGroup] | None = None
+    model_config = {"extra": "forbid"}
+    
+    gender: Gender | None = None
+    age_group: AgeGroup | None = None
     country_id: str | None = None
     min_age: int | None = Field(default=None, ge=0)
     max_age: int | None = Field(default=None, ge=0)
@@ -53,6 +74,8 @@ class FilterParams(BaseModel):
     min_country_probability: float | None = Field(default=None, ge=0.0, le=1.0)
 
 class SortParams(BaseModel):
+    model_config = {"extra": "forbid"}
+    
     sort_by: SortEnum | None = None
     order: OrderByEnum = OrderByEnum.ASCENDING
 
