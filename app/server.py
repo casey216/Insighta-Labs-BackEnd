@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from app.api.v1.routers import api_router
 from app.core.settings import settings
+from app.core.exception_handlers import add_exception_handlers
 from app.db.database import init_db
 from app.models.profile import Profile
 
@@ -17,6 +18,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+add_exception_handlers(app)
 app.include_router(api_router)
 
 reload = False
