@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Gender(StrEnum):
@@ -47,10 +47,10 @@ class FilterParams(BaseModel):
     gender: list[Gender] | None = None
     age_group: list[AgeGroup] | None = None
     country_id: str | None = None
-    min_age: int | None = None
-    max_age: int | None = None
-    min_gender_probability: float | None = None
-    min_country_probability: float | None = None
+    min_age: int | None = Field(default=None, ge=0)
+    max_age: int | None = Field(default=None, ge=0)
+    min_gender_probability: float | None = Field(default=None, ge=0.0, le=1.0)
+    min_country_probability: float | None = Field(default=None, ge=0.0, le=1.0)
 
 class SortParams(BaseModel):
     sort_by: SortEnum | None = None
