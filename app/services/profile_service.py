@@ -93,11 +93,13 @@ class ProfileQueryBuilder:
         if country_id:
             self.query = self.query.filter(Profile.country_id == country_id.upper())
 
-    def filter_country_probability(self, min_country_p: float, max_country_p: float):
+    def filter_country_probability(self, min_country_p: float):
         if min_country_p:
             self.query = self.query.filter(Profile.country_probability == min_country_p)
-        if max_country_p:
-            self.query = self.query.filter(Profile.country_probability == max_country_p)
+        
+    def filter_gender_probability(self, min_gender_p: float)
+        if min_gender_p:
+            self.query = self.query.filter(Profile.country_probability == min_gender_p)
 
     def sort_by(self, sort_params: SortParams):
         if sort_params.sort_by:
