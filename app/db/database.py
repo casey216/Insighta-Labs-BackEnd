@@ -21,6 +21,11 @@ def _build_database_url(test: bool = False) -> tuple[str, dict]:
         url = f"sqlite:///{BASE_DIR}/{settings.DB_NAME}.db"
         connect_args["check_same_thread"] = False
         return url, connect_args
+
+    if settings.DB_TYPE == "vercel":
+        url = "sqlite:////tmp/db.sqlite3"
+        connect_args["check_same_thread"] = False
+        return url, connect_args
     
     if settings.DB_TYPE == "postgresql":
         url = (
