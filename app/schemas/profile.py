@@ -57,9 +57,9 @@ class SortParams(BaseModel):
     order_by: OrderByEnum = OrderByEnum.ASCENDING
 
 class PaginationParams:
-    def __init__(self, page: int = 1, limit: int = 100):
+    def __init__(self, page: int = 1, limit: int = 10):
         self.page = max(page, 1)
-        self.limit = min(limit, 100)
+        self.limit = min(limit, 50)
 
     @property
     def offset(self):
