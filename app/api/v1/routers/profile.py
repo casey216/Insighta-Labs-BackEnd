@@ -74,9 +74,3 @@ def nlq_search(
         ]
     }
     
-@router.get("/seed")
-def seed():
-    import app.db.seeds.seeder as seeder
-
-    seeder.seed_profiles()
-    

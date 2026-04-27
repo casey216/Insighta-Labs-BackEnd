@@ -7,6 +7,7 @@ from app.core.settings import settings
 from app.core.exception_handlers import add_exception_handlers
 from app.db.database import init_db, Base
 import app.db.database as db_module
+import app.db.seeds.seeder as seeder
 from app.models.profile import Profile
 
 
@@ -15,6 +16,7 @@ async def lifespan(app: FastAPI):
     if not settings.TESTING:
         init_db()
         Base.metadata.create_all(bind=db_module.engine)
+        seeder.seed_profiles()
 
     yield
 
