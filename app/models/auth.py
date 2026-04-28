@@ -1,16 +1,16 @@
 import uuid
 from datetime import datetime, timedelta, timezone
 
-from sqlalchemy import UUID, String, Boolean, DateTime, ForeignKey
+from sqlalchemy import UUID, String, Boolean, DateTime, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel
-from .user import User
 
 
 class RefreshToken(BaseModel):
     __tablename__ = "refreshtokens"
 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"))
     token_hash: Mapped[str] = mapped_column(String)
     expires_at: Mapped[datetime] = mapped_column(
