@@ -3,9 +3,10 @@ from datetime import datetime
 from uuid_extensions import uuid7
 
 from sqlalchemy import UUID, String, DateTime, func, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import BaseModel
+from .auth import RefreshToken
 
 
 class User(BaseModel):
@@ -20,3 +21,5 @@ class User(BaseModel):
     is_active: Mapped[bool] = mapped_column(Boolean)
     last_login_at: Mapped[datetime] = mapped_column(DateTime)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    tokens: Mapped[list["RefreshToken"]] = relationship("RefreshToken", back_populates="user")
