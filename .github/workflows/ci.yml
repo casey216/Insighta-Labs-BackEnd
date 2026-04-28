@@ -28,3 +28,6 @@ jobs:
 
       - name: Run tests
         run: pytest --tb=short -q
+        env:
+          TESTING: "true"
+          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
