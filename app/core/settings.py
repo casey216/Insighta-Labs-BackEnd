@@ -32,5 +32,12 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_TYPE: str
 
+    # Github Secrets
+    GITHUB_CLIENT_ID: str
+    GITHUB_CLIENT_SECRET: str
+
+    # JWT
+    JWT_SECRET_KEY: str
+
 
 settings = Settings()   # type: ignore

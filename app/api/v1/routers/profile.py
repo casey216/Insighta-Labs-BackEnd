@@ -38,7 +38,7 @@ def read_all_profiles(
             profile.to_dict() for profile in (data or [])
         ]
     }
-
+#test
 
 @router.get("/search")
 def nlq_search(
