@@ -36,4 +36,3 @@ class UserUpdate(BaseModel):
     avatar_url: str
     role: RoleEnum
     is_active: bool
-    
