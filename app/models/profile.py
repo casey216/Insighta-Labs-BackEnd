@@ -5,17 +5,7 @@ from uuid_extensions import uuid7
 from sqlalchemy import UUID, String, Float, Integer, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.db.database import Base
-from .base import ModelMixin
-
-
-class BaseModel(Base, ModelMixin):
-    """
-    Project base class — all models inherit __repr__ and to_dict()
-    automatically just by extending Base.
-    """
-
-    __abstract__ = True
+from .base import BaseModel
 
 
 class Profile(BaseModel):

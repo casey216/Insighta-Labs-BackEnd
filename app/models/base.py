@@ -5,6 +5,8 @@ from typing import Any
 from sqlalchemy import inspect
 from sqlalchemy.orm import Mapper
 
+from app.db.database import Base
+
 
 def _mapper(obj: object) -> Mapper:
     """Returns the mapper for a model instance"""
@@ -57,3 +59,12 @@ class ToDictMixin:
 
 class ModelMixin(ReprMixin, ToDictMixin):
     pass
+
+
+class BaseModel(Base, ModelMixin):
+    """
+    Project base class — all models inherit __repr__ and to_dict()
+    automatically just by extending Base.
+    """
+
+    __abstract__ = True
