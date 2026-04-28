@@ -5,8 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.core.nlp_parser import parse_natural_language_query
 from app.db.database import get_db
-from app.models.profile import Profile
-from app.schemas.profile import FilterParams, SortParams, PaginationParams, AllProfiles, Gender
+from app.schemas.profile import FilterParams, SortParams, PaginationParams, AllProfiles
 from app.services.profile_service import ProfileService
 
 
@@ -38,7 +37,6 @@ def read_all_profiles(
             profile.to_dict() for profile in (data or [])
         ]
     }
-# test
 
 
 @router.get("/search")

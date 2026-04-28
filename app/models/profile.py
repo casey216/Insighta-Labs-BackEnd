@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime
 from uuid_extensions import uuid7
 
 from sqlalchemy import UUID, String, Float, Integer, DateTime, func

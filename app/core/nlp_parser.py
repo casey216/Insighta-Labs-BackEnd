@@ -3,7 +3,7 @@ Rule-based natural language query parser.
 No AI or LLMs used — pure regex/keyword matching.
 """
 import re
-from typing import Optional, Dict, Any
+from typing import Optional, Dict
 
 from app.schemas.profile import AgeGroup, FilterParams, Gender
 
