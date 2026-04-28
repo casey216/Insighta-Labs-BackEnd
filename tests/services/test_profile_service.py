@@ -4,7 +4,10 @@ import pytest
 from sqlalchemy.exc import IntegrityError
 
 from app.models.profile import Profile
-from app.schemas.profile import ProfileCreate, ProfileUpdate, Gender, AgeGroup
+from app.schemas.profile import (
+    ProfileCreate, ProfileUpdate, Gender, AgeGroup,
+    FilterParams, PaginationParams
+)
 from app.services.profile_service import ProfileService
 
 
@@ -62,11 +65,16 @@ class TestProfileService:
     def test_get_all_profiles(self, db_session):
         ProfileService.create_profile(db_session, create_sample_profile())
         ProfileService.create_profile(db_session, create_sample_profile(1))
+        filter_params = FilterParams()
+        p = PaginationParams()
 
-        profiles = ProfileService.get_all_profiles(db_session)
+        result = ProfileService.get_all_profiles(db_session, filter_params, p)
 
-        assert isinstance(profiles, list)
-        assert len(profiles) >= 2
+        assert isinstance(result, dict)
+        assert "data" in result
+        assert "total" in result
+        assert isinstance(result.get("data"), list)
+        assert result.get("total") == 2
 
     def test_profile_not_found(self, db_session):
         profile_id = uuid4()
