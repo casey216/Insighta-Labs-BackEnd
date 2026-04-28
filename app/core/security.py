@@ -23,15 +23,17 @@ def create_access_token(user_id: str) -> str:
         algorithm=ALGORITHM
     )
 
+
 def create_refresh_token() -> tuple[str, str]:
     raw = secrets.token_urlsafe(32)
     hashed = hashlib.sha256(raw.encode()).hexdigest()
     return raw, hashed
 
+
 def verify_access_token(token: str | None) -> tuple[dict | None, str | None]:
     if not token:
         return None, "Token Missing"
-    
+
     try:
         return jwt.decode(
             token=token,
