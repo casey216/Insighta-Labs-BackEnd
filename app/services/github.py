@@ -1,3 +1,6 @@
+import base64
+import hashlib
+
 from app.core.settings import settings
 
 
@@ -14,3 +17,8 @@ def build_github_auth_url(state: str, code_challenge: str) -> str:
     }
     query = "&".join(f"{k}={v}" for k, v in params.items())
     return f"{GITHUB_AUTH_URL}?{query}"
+
+
+def pkce_challange(verifier: str) -> str:
+    digest = hashlib.sha256(verifier.encode()).digest()
+    return base64.urlsafe_b64encode(digest).rstrip(b"=").decode()

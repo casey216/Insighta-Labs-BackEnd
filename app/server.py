@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.routers import api_router
+from app.auth.router import router as auth_router
 from app.core.settings import settings
 from app.core.exception_handlers import add_exception_handlers
 from app.db.database import init_db, Base
@@ -32,6 +33,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 add_exception_handlers(app)
+app.include_router(auth_router)
 app.include_router(api_router)
 
 reload = False
